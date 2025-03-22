@@ -1,0 +1,81 @@
+{% extends "blog/base.html" %} {% block content %}
+<div class="create-post-container">
+  <h2 class="page-title">Create a New Post</h2>
+
+  <form method="post" enctype="multipart/form-data" class="post-form">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="publish-btn">Publish</button>
+  </form>
+
+  <a href="{% url 'all_posts' %}" class="back-btn">← Back to All Posts</a>
+</div>
+{% endblock %} {% block extra_css %}
+<style>
+  .create-post-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .post-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .post-form p {
+    margin-bottom: 15px;
+  }
+
+  .post-form input,
+  .post-form textarea,
+  .post-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .publish-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .publish-btn:hover {
+    background: #218838;
+  }
+
+  .back-btn {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+
+  .back-btn:hover {
+    color: #0056b3;
+  }
+</style>
+{% endblock %}

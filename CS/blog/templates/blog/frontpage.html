@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Blog</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* General Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f0f2f5;
+        color: #333;
+      }
+
+      /* Header */
+      header {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Container */
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+      }
+
+      /* Form Styling */
+      .form-container {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container h2 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .form-container form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-container input,
+      .form-container textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+
+      .form-container button {
+        background: #2575fc;
+        color: white;
+        padding: 12px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .form-container button:hover {
+        background: #1b5cd3;
+      }
+
+      /* Blog Posts Section */
+      .posts-section {
+        margin-top: 40px;
+      }
+
+      .posts-section h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+      }
+
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .post-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .post-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      .post-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+
+      .post-card a {
+        text-decoration: none;
+        color: #2575fc;
+        font-weight: bold;
+        transition: color 0.3s;
+      }
+
+      .post-card a:hover {
+        color: #1b5cd3;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Welcome to My Blog</header>
+
+    <div class="container">
+      <!-- Create Post Form -->
+      <div class="form-container">
+        <h2>Create a New Post</h2>
+        <form method="POST">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Publish</button>
+        </form>
+      </div>
+
+      <!-- Posts List -->
+      <div class="posts-section">
+        <h2>Latest Posts</h2>
+        <div class="posts-grid">
+          {% for post in posts %}
+          <div class="post-card">
+            <h3>
+              <a href="{% url 'post_detail' post_id=post.id %}"
+                >{{ post.title }}</a
+              >
+            </h3>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
